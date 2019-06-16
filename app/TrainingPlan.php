@@ -8,8 +8,13 @@ class TrainingPlan extends Model
 {
     protected $guarded = [];
 
-    public function users()
+    public function user()
     {
-      return $this->belongsTo(User::class);
+      return $this->belongsTo(\App\User::class);
+    }
+
+    public function months()
+    {
+      return $this->hasMany(\App\Month::class);
     }
 }

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Month extends Model
+class Week extends Model
 {
     protected $guarded = [];
 
@@ -15,6 +15,6 @@ class Month extends Model
 
     public function days()
     {
-      return $this->hasMany(Week::class);
+      return $this->hasMany(\App\Day::class);
     }
 }

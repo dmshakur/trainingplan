@@ -38,6 +38,6 @@ class User extends Authenticatable
 
     public function trainingPlans()
     {
-      return $this->hasMany(TrainingPlan::class);
+      return $this->hasMany(\App\TrainingPlan::class);
     }
 }

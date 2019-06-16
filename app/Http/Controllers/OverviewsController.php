@@ -10,7 +10,7 @@ class OverviewsController extends Controller
 {
     public function trainingPlan($trainingPlanId)
     {
-      $trainingPlan = TrainingPlan::table('TrainingPlan')->where('id', $trainingPlanId);
+      $trainingPlan = TrainingPlan::find($trainingPlanId);
 
       return view('trainingplan.trainingplan', compact('trainingPlan'));
     }
