@@ -13,8 +13,8 @@ class TrainingPlan extends Model
       return $this->belongsTo(\App\User::class);
     }
 
-    public function months()
+    public function days()
     {
-      return $this->hasMany(\App\Month::class);
+      return $this->hasMany(\App\Day::class);
     }
 }

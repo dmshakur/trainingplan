@@ -15,7 +15,7 @@
             <h5 class="card-title">{{ $trainingPlan->title }}</h5>
             <h6>{{ $trainingPlan->weeks }} Weeks</h6>
             <p>{{ $trainingPlan->description }}</p>
-            <a class="btn btn-dark" href="{{ route('overview.trainingplan', ['trainingPlan_id' => $trainingPlan->id]) }}">View</a>
+            <a class="btn btn-dark" href="{{ route('overview.trainingplan', ['trainingPlan_id' => $trainingPlan->id, 'month_count' => 1]) }}">View</a>
           </div>
         </div>
       @endforeach

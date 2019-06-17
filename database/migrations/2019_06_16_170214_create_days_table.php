@@ -15,7 +15,7 @@ class CreateDaysTable extends Migration
     {
         Schema::create('days', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('week_id');
+            $table->unsignedInteger('trainingplan_id');
             $table->unsignedInteger('runs');
             $table->decimal('mileage', 5, 2);
             $table->date('date');

@@ -8,9 +8,9 @@ class Day extends Model
 {
     protected $guarded = [];
 
-    public function week()
+    public function trainingplan()
     {
-      return $this->belongsTo(\App\Week::class);
+      return $this->belongsTo(\App\TrainingPlan::class);
     }
 
     public function meals()

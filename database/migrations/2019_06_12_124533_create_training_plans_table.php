@@ -16,6 +16,7 @@ class CreateTrainingPlansTable extends Migration
         Schema::create('training_plans', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('user_id');
+            $table->unsignedInteger('month_count');
             $table->string('title');
             $table->string('description');
             $table->unsignedInteger('weeks');
