@@ -16,17 +16,11 @@
       </li>
     @endfor
   </ul>
-  {{Carbon\Carbon::parse($trainingPlan->startdate)->addMonth(1)->day(1)}}
+
     @for ($i = 0; $i < $trainingPlan->month_count; $i++)
       @if (intval(substr(Request::fullUrl(), -1)) === $i)
         @include('trainingplan.calendar', [
-          'startdate' => function() {
-            if (substr(Request::fullUrl(), -1) === "1") {
-              return Carbon\Carbon::parse($trainingPlan->startdate)->addMonth(1)->day(1);
-            } else {
-              return $trainingPlan->startdate;
-            }
-          }
+          'startdate' => substr(Request::fullUrl(), -1) === "1" ? $trainingPlan->startdate : strval(Carbon\Carbon::parse($trainingPlan->startdate)->addMonth(1)->day(1))
         ])
       @endif
     @endfor
