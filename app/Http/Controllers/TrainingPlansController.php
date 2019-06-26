@@ -17,7 +17,7 @@ class TrainingPlansController extends Controller
 
   public function store(Request $request)
   {
-    $data = $request->validate([
+    $trainingData = $request->validate([
       'user_id' => 'required',
       'month_count' => '',
       'title' => 'required',
@@ -26,19 +26,21 @@ class TrainingPlansController extends Controller
       'startdate' => 'required'
     ]);
 
-    $data['month_count'] = Carbon::parse($data['startdate'])->diffInMonths(Carbon::parse($data['startdate'])->addWeeks(27));
+    $trainingData['month_count'] = Carbon::parse($trainingData['startdate'])->diffInMonths(Carbon::parse($trainingData['startdate'])->addWeeks(27));
 
-    TrainingPlan::create($data);
+    TrainingPlan::create($trainingData);
 
     $dayData = [
       'trainingplan_id' => \Illuminate\Support\Facades\DB::table('training_plans')->latest()->first()->id,
       'runs' => 0,
       'mileage' => 0,
-      'date' => Carbon::parse($data['startdate']),
+      'date' => Carbon::parse($trainingData['startdate']),
     ];
 
-    for ($i = 0; $i < ($data['weeks'] * 7) + 1; $i++) {
-      $dayData['date'] = Carbon::parse($dayData['date'])->day += 1;
+    $date = Carbon::parse($trainingData['startdate']);
+
+    for ($i = 0; $i < ($trainingData['weeks'] * 7) + 1; $i++) {
+      $dayData['date'] = Carbon::parse($date)->addDays($i);
       \App\Day::create($dayData);
     }
 

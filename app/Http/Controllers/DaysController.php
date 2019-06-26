@@ -9,23 +9,27 @@ class DaysController extends Controller
 {
   protected $guarded = [];
 
+  public function show($trainingplan_id, $month, $date)
+  {
+    $day = Day::where('trainingplan_id', $trainingplan_id)->where('date', $date)->get()[0];
+    return view('trainingplan.dayview', compact(
+      'trainingplan_id',
+      'month',
+      'date',
+      'day'
+    ));
+  }
+
   public function store($request)
   {
-    $date = Carbon::parse($request->startdate);
-
     $data = [
-      'trainingplan_id' => $request->id,
-      'runs' => 0,
-      'mileage' => 0,
-      'date' => $date,
+      'runs' => $request->runs,
+      'mileage' => $request->mileage,
+      'date' => $request->date,
     ];
 
-    for ($i = 0; $i < ($request->weeks * 7) + 1; $i++) {
-      $data->date = Carbon::parse($date)->day += 1;
-      Day::create($data);
-    }
+    Day::save($data);
 
-
-    return redirect('overview');
+    return redirect('trainingplan.dayview');
   }
 }

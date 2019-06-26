@@ -16,10 +16,14 @@ class CreateRunsTable extends Migration
         Schema::create('runs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('day_id');
-            $table->decimal('duration', 6, 2);
-            $table->time('time');
-            $table->decimal('average_pace', 4, 2);
-            $table->json('nutrition');
+            $table->unsignedInteger('duration_hours');
+            $table->unsignedInteger('duration_minutes');
+            $table->unsignedInteger('miles');
+            $table->unsignedInteger('average_pace_minutes');
+            $table->unsignedInteger('average_pace_seconds');
+            $table->string('prerun_nutrition');
+            $table->string('run_nutrition');
+            $table->string('postrun_nutrition');
             $table->time('start_time');
             $table->string('details');
             $table->timestamps();

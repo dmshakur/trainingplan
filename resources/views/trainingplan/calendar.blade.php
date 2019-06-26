@@ -26,17 +26,18 @@
         Saturday
       </div>
     </div>
-    {{-- {{dd($startdate)}} --}}
-      @for ($i = Carbon\Carbon::parse($startdate)->day; $i <= Carbon\Carbon::parse($startdate)->daysInMonth;)
+
+      @for ($i = Carbon\Carbon::parse($startdate)->day;
+              $i <= Carbon\Carbon::parse($startdate)->daysInMonth;
+            ) {{-- $i for loop --}}
         <div class="border row">
           <div class="border border-primary col">
             Week View
           </div>
 
+          @for ($j = 0; $j <= 6; $j++, $i++) {{-- $j for loop --}}
 
-          @for ($j = 0; $j <= 6; $j++, $i++)
-
-            @if ($i === Carbon\Carbon::parse($startdate)->day) {{-- To Fill in empty space at the beginning of the calendar --}}
+            @if ($i === Carbon\Carbon::parse($startdate)->day) {{-- To fill in empty space at the beginning of the calendar --}}
               @for ($k = 0; $k < Carbon\Carbon::parse($startdate)->dayOfWeek; $k++, $j++)
                 <div class="border col">
 
@@ -44,9 +45,21 @@
               @endfor
             @endif
 
-            @if ($i <= Carbon\Carbon::parse($startdate)->daysInMonth) {{-- To fill in the days then the empty space at the end of the calendar --}}
+            @if (($i <= Carbon\Carbon::parse($startdate)->daysInMonth)
+                  || ($i <=
+                        Carbon\Carbon::parse(Carbon\Carbon::parse($trainingPlan->startdate)->addWeeks($trainingPlan->weeks))->day )
+                ) {{-- To fill in the days then the empty space at the end of the calendar --}}
               <div class="border col">
-                Day {{ $i }}
+               {{ $i }} {{ $startdate }}
+               <a href="{{
+                 route('day.show', [
+                   'trainingplan_id' => $trainingPlan->id,
+                   'month' => Carbon\Carbon::parse($startdate)->month,
+                   'date' => Carbon\Carbon::parse($startdate)->addDays($i)
+                 ])
+               }}" class="btn btn-sm btn-dark">
+                 View
+               </a>
               </div>
             @else
               <div class="border col">
@@ -54,9 +67,9 @@
               </div>
             @endif
 
-          @endfor
+          @endfor {{-- $j for loop --}}
 
         </div>
-      @endfor
+      @endfor {{-- $i for loop --}}
 
   </div>

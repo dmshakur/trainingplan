@@ -12,11 +12,21 @@ class RunsController extends Controller
   public function store(Request $request)
   {
     $data = $request->validate([
-
+      'day_id' => 'required',
+      'duration_hours' => 'required',
+      'duration_seconds' => 'required',
+      'miles' => 'required',
+      'average_pace_minutes' => 'required',
+      'average_pace_seconds' => 'required',
+      'prerun_nutrition' => 'required',
+      'run_nutrition' => 'required',
+      'postrun_nutrition' => 'required',
+      'start_time' => 'required',
+      'details' => 'required',
     ]);
+    dd($data);
+    Run::create($data);
 
-    Month::create($data);
-
-    return redirect('');
+    return redirect(Request::url());
   }
 }

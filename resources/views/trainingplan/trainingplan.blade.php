@@ -17,13 +17,15 @@
     @endfor
   </ul>
 
-    @for ($i = 0; $i < $trainingPlan->month_count; $i++)
-      @if (intval(substr(Request::fullUrl(), -1)) === $i)
-        @include('trainingplan.calendar', [
-          'startdate' => substr(Request::fullUrl(), -1) === "1" ? $trainingPlan->startdate : strval(Carbon\Carbon::parse($trainingPlan->startdate)->addMonth(1)->day(1))
-        ])
-      @endif
-    @endfor
+  @for ($i = 0; $i < $trainingPlan->month_count + 2; $i++)
+    @if (intval(substr(Request::fullUrl(), -1)) === $i)
+      @include('trainingplan.calendar', [
+        'startdate' => substr(Request::fullUrl(), -1) === "1"
+          ? $trainingPlan->startdate
+          : strval(Carbon\Carbon::parse($trainingPlan->startdate)->addMonth($i - 1)->day(1))
+      ])
+    @endif
+  @endfor
 
 </div>
 @endsection
