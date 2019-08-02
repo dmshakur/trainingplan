@@ -18,7 +18,7 @@
                 </div>
             </div>
         </div> --}}
-        <my-button type="submit" text="button"></my-button>
+        {{-- <my-button type="submit" text="button"></my-button> --}}
         <h1>Welcome to your training app</h1>
         <h2>Sign in to continue</h2>
     </div>

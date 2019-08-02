@@ -9,7 +9,6 @@
       </div>
       <div class="modal-body">
         <form action="{{ route('run.store') }}" method="post">
-
           {{ method_field('POST') }}
             @csrf
 
@@ -76,7 +75,21 @@
             </div>
 
             <div class="form-group row">
-                <label for="prerun_nutrition" class="col-md-4 col-form-label text-md-right">Post-Run Nutrition:</label>
+              <label for="location" class="col-md-4 col-form-label text-md-right">Location:</label>
+
+              <div class="col-md-6">
+                <input id="location" type="text" class="form-control @error('location') is-invalid @enderror" name="location" value="{{ old('location') }}" required autocomplete="on" autofocus>
+
+                  @error('location')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+                </div>
+              </div>
+
+            <div class="form-group row">
+                <label for="prerun_nutrition" class="col-md-4 col-form-label text-md-right">Pre-Run Nutrition:</label>
 
                 <div class="col-md-6">
                     <input id="prerun_nutrition" type="text" class="form-control @error('prerun_nutrition') is-invalid @enderror" name="prerun_nutrition" value="{{ old('prerun_nutrition') }}" required autocomplete="on" autofocus>
@@ -145,7 +158,7 @@
                 </div>
             </div>
             <input type="hidden" name="day_id" value="{{ $day->id }}">
-          <button type="submit" name="button" class="float-right btn btn-dark">Submit</button>
+          <button type="submit" class="float-right btn btn-dark">Submit</button>
         </form>
       </div>
       <div class="modal-footer">

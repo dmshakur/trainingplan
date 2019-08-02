@@ -1,9 +1,7 @@
   <div class="container">
 
     <div class="row">
-      <div class="col">
-
-      </div>
+      <div class="col"></div>
       <div class="col border-top border-bottom border-left">
         Sunday
       </div>
@@ -46,8 +44,7 @@
             @endif
 
             @if (($i <= Carbon\Carbon::parse($startdate)->daysInMonth)
-                  || ($i <=
-                        Carbon\Carbon::parse(Carbon\Carbon::parse($trainingPlan->startdate)->addWeeks($trainingPlan->weeks))->day )
+                  || ($i <= Carbon\Carbon::parse(Carbon\Carbon::parse($trainingPlan->startdate)->addWeeks($trainingPlan->weeks))->day )
                 ) {{-- To fill in the days then the empty space at the end of the calendar --}}
               <div class="border col">
                {{ $i }} {{ $startdate }}
@@ -55,7 +52,7 @@
                  route('day.show', [
                    'trainingplan_id' => $trainingPlan->id,
                    'month' => Carbon\Carbon::parse($startdate)->month,
-                   'date' => Carbon\Carbon::parse($startdate)->addDays($i)
+                   'date' => Carbon\Carbon::parse($startdate)->day($i)
                  ])
                }}" class="btn btn-sm btn-dark">
                  View

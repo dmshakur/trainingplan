@@ -21,6 +21,7 @@ class CreateRunsTable extends Migration
             $table->unsignedInteger('miles');
             $table->unsignedInteger('average_pace_minutes');
             $table->unsignedInteger('average_pace_seconds');
+            $table->string('location');
             $table->string('prerun_nutrition');
             $table->string('run_nutrition');
             $table->string('postrun_nutrition');

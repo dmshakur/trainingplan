@@ -11,22 +11,23 @@ class RunsController extends Controller
 
   public function store(Request $request)
   {
-    $data = $request->validate([
+    $runData = $request->validate([
       'day_id' => 'required',
-      'duration_hours' => 'required',
-      'duration_seconds' => 'required',
+      'duration_hours' => '',
+      'duration_minutes' => '',
       'miles' => 'required',
-      'average_pace_minutes' => 'required',
-      'average_pace_seconds' => 'required',
-      'prerun_nutrition' => 'required',
-      'run_nutrition' => 'required',
-      'postrun_nutrition' => 'required',
+      'average_pace_minutes' => '',
+      'average_pace_seconds' => '',
+      'location' => 'required',
+      'prerun_nutrition' => '',
+      'run_nutrition' => '',
+      'postrun_nutrition' => '',
       'start_time' => 'required',
-      'details' => 'required',
+      'details' => '',
     ]);
-    dd($data);
-    Run::create($data);
 
-    return redirect(Request::url());
+    Run::create($runData);
+
+    return view('overview');
   }
 }

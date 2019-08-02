@@ -26,7 +26,7 @@ class TrainingPlansController extends Controller
       'startdate' => 'required'
     ]);
 
-    $trainingData['month_count'] = Carbon::parse($trainingData['startdate'])->diffInMonths(Carbon::parse($trainingData['startdate'])->addWeeks(27));
+    $trainingData['month_count'] = Carbon::parse($trainingData['startdate'])->diffInMonths(Carbon::parse($trainingData['startdate'])->addWeeks($trainingData['weeks']));
 
     TrainingPlan::create($trainingData);
 
